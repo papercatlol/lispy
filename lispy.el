@@ -6776,6 +6776,8 @@ The result is a string."
           (funcall (nth 1 handler) e-str))
       (error "%s isn't supported currently" major-mode))))
 
+(defvar lispy-eval-expression-history nil)
+
 (defun lispy-eval-expression ()
   "Like `eval-expression', but for current language."
   (interactive)
@@ -6783,7 +6785,8 @@ The result is a string."
                   (if (member major-mode lispy-elisp-modes)
                       #'lispy-mode
                     #'ignore)
-                (read-from-minibuffer "Eval: "))))
+                (read-from-minibuffer
+                 "Eval: " nil nil nil 'lispy-eval-expression-history))))
     (lispy-message (lispy--eval form))))
 
 (defvar lispy-eval-match-data nil)
