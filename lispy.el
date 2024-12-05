@@ -7394,9 +7394,13 @@ See https://clojure.org/guides/weird_characters#_character_literal.")
                   (lispy--read-replace " *,+" "clojure-commas"))
                 ;; ——— \ char syntax (LISP)————
                 (goto-char (point-min))
-                (while (let ((case-fold-search nil))
+                (while (let ((case-fold-search t))
                          ;; http://lispworks.com/documentation/HyperSpec/Body/02_ac.htm
-                         (re-search-forward "#\\\\\\(space\\|newline\\|.\\)" nil t))
+                         (re-search-forward (rx "#\\" (or "tab" "page" "space"
+                                                          "return" "rubout"
+                                                          "newline" "linefeed"
+                                                          "backspace" any))
+                                            nil t))
                   (unless (lispy--in-string-or-comment-p)
                     (replace-match (format "(ly-raw lisp-char %S)"
                                            (substring-no-properties
