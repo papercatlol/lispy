@@ -1894,7 +1894,7 @@ otherwise the whole string is unquoted."
            (self-insert-command 1))
 
           (t
-           (lispy--space-unless "^\\|\\s-\\|\\s(\\|[#]")
+           (lispy--space-unless "^\\|\\s-\\|\\s(\\|[#][a-zA-Z]?")
            (insert "\"\"")
            (unless (looking-at "\n\\|)\\|}\\|\\]\\|$")
              (just-one-space)
@@ -9392,7 +9392,7 @@ When ARG is non-nil, unquote the current string."
            (insert "\""))
 
           (t
-           (lispy--space-unless "^\\|\\s-\\|\\s(\\|[#]")
+           (lispy--space-unless "^\\|\\s-\\|\\s(\\|[#][a-zA-Z]?")
            (insert "\"\"")
            (unless (looking-at "\n\\|)\\|}\\|\\]\\|$")
              (just-one-space)
