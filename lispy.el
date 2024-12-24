@@ -8116,6 +8116,8 @@ The outer delimiters are stripped."
 (defun lispy--insert (expr)
   "Insert the EXPR read by `lispy--read'."
   (let ((start-pt (point))
+        (print-length nil)
+        (print-level nil)
         beg
         sxp type)
     (prin1 expr (current-buffer))
